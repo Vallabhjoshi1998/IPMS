@@ -1,0 +1,65 @@
+.form{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+    width: 700px;
+    height: 500px;
+    padding: 0px;
+    border: 3px solid #6495ED;
+    margin:auto;
+    background-color: azure;
+}
+input[type=text] {
+    border: 2px solid #6495ED;
+    border-radius: 4px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto; 
+    line-height: 23px;
+    width: 300px;
+}
+
+input[type=email] {
+    border: 2px solid #6495ED;
+    border-radius: 4px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto; 
+    line-height: 23px;
+    width: 300px;
+}
+input[type=date] {
+    border: 2px solid #6495ED;
+    border-radius: 4px;
+    line-height: 20px;
+    width: 300px;
+    text-align: center;
+    margin:auto;
+    
+}
+.submit:focus {
+    background-color:#6495ED;
+}
+input[type=submit]{
+    background-color:#6495ED;
+    color: white;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+
+  }
+input[type=submit]:focus{
+    background-color:#3F00FF;
+}
+.file:focus:focus {
+    background-color:#6495ED;
+}
+input.file{
+    background-color:#6495ED;
+    color: white;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+  }
+input.file:focus{
+    background-color:#3F00FF;
+}
