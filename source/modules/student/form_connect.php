@@ -1,6 +1,7 @@
 <?php
 $forms_db = mysqli_connect("localhost", "root", "", "ipms")  or die("Connection failed");
 if (!empty($_POST['submit'])) {
+    $reg_no = $_POST['reg_no'];
     $stud_name = $_POST['stud_name'];
     $work_supervisor = $_POST['work_supervisor'];
     $sup_email = $_POST['sup_email'];
@@ -28,19 +29,25 @@ if (!empty($_POST['submit'])) {
     $fifteen = $_POST['fifteen'];
 
     $que1 = $_POST['que1'];
+    $que1 = mysqli_escape_string($forms_db, $que1);
     $que2 = $_POST['que2'];
+    $que2 = mysqli_escape_string($forms_db, $que2);
     $que3 = $_POST['que3'];
+    $que3 = mysqli_escape_string($forms_db, $que3);
     $que4 = $_POST['que4'];
+    $que4 = mysqli_escape_string($forms_db, $que4);
     $que5 = $_POST['que5'];
+    $que5 = mysqli_escape_string($forms_db, $que5);
     $rating = $_POST['rating'];
     $que6 = $_POST['que6'];
+    $que6 = mysqli_escape_string($forms_db, $que6);
     
 
     
-    $forms_query = "INSERT INTO `student_feedback`(`stud_name`, `work_supervisor`, `sup_email`, `companyName`,
+    $forms_query = "INSERT INTO `student_feedback`(`reg_no`,`stud_name`, `work_supervisor`, `sup_email`, `companyName`,
      `internship_address`, `faculty_coordinator`, `f_date`, `paid`, `department`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`,
      `nine`, `ten`, `eleven`, `twelve`, `thirteen`, `fourteen`, `fifteen`, `que1`, `que2`, `que3`, `que4`, `que5`, `rating`, `que6`) VALUES
-     ('$stud_name','$work_supervisor','$sup_email','$companyName','$internship_address','$faculty_coordinator','$f_date','$paid','$department','$one','$two',
+     ('$reg_no','$stud_name','$work_supervisor','$sup_email','$companyName','$internship_address','$faculty_coordinator','$f_date','$paid','$department','$one','$two',
     '$three','$four','$five','$six','$seven','$eight','$nine','$ten','$eleven','$two',
     '$thirteen','$fourteen','$fifteen','$que1','$que2','$que3','$que4','$que5','$rating','$que6')";
 
