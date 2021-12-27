@@ -18,7 +18,13 @@ $prof = "SELECT * FROM info WHERE email_id='$username'";
 $res_prof = mysqli_query($connect, $prof);
 $res = mysqli_fetch_array($res_prof);
 
-$user_profile = $res['profile_img'];
+if($res['profile_img'] == null){
+    $profile_img = "../profile_img/def.jpg";
+}
+else{
+    $profile_img = $res['profile_img'];
+}
+
 ?>
 
 

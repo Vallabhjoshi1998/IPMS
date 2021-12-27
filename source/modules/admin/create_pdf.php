@@ -6,7 +6,8 @@ $conn = mysqli_connect("localhost", "root", "", "ipms");
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-$sql = "SELECT * FROM student_feedback";
+$reg_no = $_SESSION['reg_no'];
+$sql = "SELECT * FROM student_feedback where reg_no='$reg_no'";
 $result = mysqli_query($conn, $sql);
 $row_pdf = mysqli_fetch_array($result);
 
