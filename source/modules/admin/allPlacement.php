@@ -1,17 +1,17 @@
 <?php
 ob_start();
 session_start();
-?>
-<?php
-include 'admin_dash_header.php';
-?>
 
-<?php
+include 'admin_dash_header.php';
+
+
+
 function fetch_data()
 {
+    $batch = $_SESSION['batch'];
     $output = '';
     $conn_here = mysqli_connect("localhost", "root", "", "ipms");
-    $sql = "SELECT * FROM placement_data";
+    $sql = "SELECT * FROM placement_data WHERE batch='$batch'";
     $result_pdf = mysqli_query($conn_here, $sql);
     while ($row = mysqli_fetch_array($result_pdf)) {
         $output .= '<tr>  
@@ -20,8 +20,7 @@ function fetch_data()
                           <td>' . $row["email_id"] . '</td>  
                           <td>' . $row["company_name"] . '</td>  
                           <td>' . $row["sal_lpa"] . '</td>  
-                     </tr>  
-                          ';
+                     </tr>';
     }
     return $output;
 }

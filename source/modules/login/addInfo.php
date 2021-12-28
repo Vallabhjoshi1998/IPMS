@@ -113,21 +113,21 @@ include 'header.php';
                 <div class="form-group row">
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="pass12"
-                            placeholder="12th Passout Year" name="pass12" required>
+                            placeholder="12th Passout Year" name="pass12">
                 </div>
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="per12"
-                            placeholder="12th Percentage" name="per12" required>
+                            placeholder="12th Percentage" name="per12">
                 </div>
                 </div>
                 <div class="form-group row">
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="passDip"
-                            placeholder="Diploma Passout Year" name="passDip" required>
+                            placeholder="Diploma Passout Year" name="passDip">
                 </div>
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="perDip"
-                            placeholder="Diploma Percentage" name="perDip" required>
+                            placeholder="Diploma Percentage" name="perDip">
                 </div>
                 </div>
                 <div class="form-group row">
@@ -163,17 +163,17 @@ include 'header.php';
                 </div>
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="sgpa6"
-                            placeholder="6th Semester SGPA" name="sgpa6" required>
+                            placeholder="6th Semester SGPA" name="sgpa6">
                 </div>
                 </div>
-                <div class="form-group row" style="text-align: center;" required>
+                <div class="form-group row" style="text-align: center;">
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="sgpa7"
-                            placeholder="7th Semester SGPA" name="sgpa7" required>
+                            placeholder="7th Semester SGPA" name="sgpa7">
                 </div>
                 <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="sgpa8"
-                            placeholder="8th Semester SGPA" name="sgpa8" required>
+                            placeholder="8th Semester SGPA" name="sgpa8">
                 </div>
                 <div>
                     &nbsp;
@@ -199,7 +199,7 @@ include 'header.php';
                 </div>
                 </div>
                 
-                <div style="text-align: center;">
+                <div style="text-align: center;" required>
                 <label for="option1">Select One Option</label></b><br>
                 <label for="option1">Placement facility by College</label>
                 <input type="radio" id="option1" name="option1" value="Placement facility by College">

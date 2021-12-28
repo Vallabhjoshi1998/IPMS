@@ -54,12 +54,12 @@
             <script src="../../assets/js/demo/chart-pie-demo.js"></script>
 
             <!-- It will disable back button after logged in -->
-            <script>
+            <!-- <script>
                 history.pushState(null, null, null);
                 window.addEventListener('popstate', function() {
                     history.pushState(null, null, null);
                 });
-            </script>
+            </script> -->
 
 </body>
 

@@ -29,6 +29,12 @@
                 <label for="firstname" class="placeholder">Notification/Alert</label>
             </div>
            
+            <div class="input-container ic1">
+                <input id="batch" class="input" type="text" placeholder=" " name="batch" value="<?php echo $batch ?>" readonly>
+                <div class="cut cut-long"></div>
+                <label for="firstname" class="placeholder">Batch</label>
+            </div>
+
             <input type="submit" name="save" class="submit" value="Add Notification" />
         </form>
 

@@ -74,9 +74,9 @@ include 'header.php';
                             <div class="form-group mb-3">
                                 <input type="password" class="form-control form-control-user" id="exampleInputPassword"
                                     name="pass" placeholder="Password" required>
-                            </div>
+                            </div><br>
                             
-                            <input class="infoSub" type="submit" name="save" class="btn btn-default" value="Login" />
+                            <input type="submit" name="save" class="btn btn-default" value="Login" style="background-color:#04AA6D; color: white; margin-left: 46.5%;">
                         </form>
 <!-- 
                         <div class="text-center">

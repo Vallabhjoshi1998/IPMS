@@ -35,7 +35,7 @@ $count = mysqli_num_rows($result);
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-md-6" style="margin-top: 1.5%; margin-left: 50%;">
+    <!-- <div class="col-xl-3 col-md-6" style="margin-top: 1.5%; margin-left: 50%;">
         <form action="" method="post" enctype="multipart/form-data">
             <input type="file" name="offer_letter" id="" style="margin-bottom: 2px;">
             <button class="btn btn-primary" name="save" data-toggle="tooltip" data-placement="bottom" title="File format - FirstName_LastName_CompanyName_BranchName">
@@ -45,42 +45,14 @@ $count = mysqli_num_rows($result);
                 Upload Offer Letters
             </button>
         </form>
-    </div>
+    </div> -->
 
-    <?php
-    if (isset($_POST['save'])) {
-        $target_dir = "../offer_letters/";
-        $target_file = $target_dir . basename($_FILES["offer_letter"]["name"]);
-        $uploadOk = 1;
-        $offer_letter = $_FILES['offer_letter']['name'];
-        $offer_tmp = $_FILES['offer_letter']['tmp_name'];
-        $imageFileType = strtolower(pathinfo($offer_letter, PATHINFO_EXTENSION));
-
-        if ($offer_letter == '') {
-            echo "<script>alert('Please Select Offer Letter')</script>";
-            $uploadOk = 0;
-        }
-
-        if (file_exists($target_file)) {
-            echo "<script>alert('This named Offer Letter already exists!')</script>";
-            echo "<script>window.open('student_dash.php', '_self')</script>";
-            exit();
-        }
-
-        if ($imageFileType != "pdf") {
-            echo "<script>alert('Sorry, Only PDF files are allowed!')</script>";
-            echo "<script>window.open('student_dash.php', '_self')</script>";
-            exit();
-        }
-
-        if ($uploadOk == 0) {
-            echo "<script>alert('Sorry your Offer Letter was not Uploaded !')</script>";
-        } else {
-            move_uploaded_file($offer_tmp, "../offer_letters/$offer_letter");
-            echo "<script>alert('Your Offer Letter was Successfull Uploaded!')</script>";
-        }
-    }
-    ?>
+    <script>
+        history.pushState(null, null, null);
+        window.addEventListener('popstate', function() {
+            history.pushState(null, null, null);
+        });
+    </script>
 
 
 </div>

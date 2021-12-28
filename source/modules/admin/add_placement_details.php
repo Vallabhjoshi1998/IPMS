@@ -25,6 +25,14 @@ include 'admin_dash_header.php';
         </div>
 
         <div class="form-group">
+            <input type="text" name="branch" class="form-control item" id="branch" placeholder="Branch" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="batch" class="form-control item" id="batch" placeholder="Batch" required>
+        </div>
+
+        <div class="form-group">
             <input type="text" name="company_name" class="form-control item" id="company_name" placeholder="Company Name" required>
         </div>
 

@@ -5,8 +5,9 @@ include_once '../utility/dbconfig.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-
 $username = $_SESSION["username"];
+$batch = $_SESSION['batch'];
+
 $query = "select fname from admin_details where email_id ='$username'";
 
 $result = mysqli_query($connect, $query);
@@ -83,7 +84,6 @@ $row_admin_name = mysqli_fetch_array($result);
                         <a class="collapse-item" href="allPlacement.php"> All Placements</a>
                         <a class="collapse-item" href="companywise_placed.php">Companywise Total<br> Placed</a>
                         <a class="collapse-item" href="trigger_mails.php"> Trigger Mails</a>
-                        <a class="collapse-item" href="fetch_offer_letters.php">See Offer Letters</a>
                     </div>
                 </div>
             </li>
@@ -136,12 +136,26 @@ $row_admin_name = mysqli_fetch_array($result);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Internship Form Data</span>
+                    <span>Add T&P Co-ordinator</span>
                 </a>
                 <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Internship Form Data</h6>
-                        <a class="collapse-item" href="stud_feedback_data.php">Student Feedback Form</a>
+                        <h6 class="collapse-header">Add T&P Co-ordinator</h6>
+                        <a class="collapse-item" href="addCo.php">Add Co-ordinator</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities4" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Feedback Forms</span>
+                </a>
+                <div id="collapseUtilities4" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">See Student Feedback Data</h6>
+                        <a class="collapse-item" href="stud_feedback_data.php">Student Feedback</a>
+                        <a class="collapse-item" href="stud_attendance_data.php">Student Attendance</a>
                     </div>
                 </div>
             </li>
@@ -194,7 +208,7 @@ $row_admin_name = mysqli_fetch_array($result);
                                     Alerts Center
                                 </h6>
                                 <?php
-                                $alert_query = "SELECT * FROM alert";
+                                $alert_query = "SELECT * FROM alert WHERE batch='$batch'";
                                 $alert_res = mysqli_query($connect, $alert_query);
                                 $total = mysqli_num_rows($alert_res);
                                 if ($total > 0) {

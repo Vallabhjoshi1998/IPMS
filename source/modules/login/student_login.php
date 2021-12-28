@@ -72,13 +72,12 @@ include 'header.php';
                             <div class="form-group mb-3">
                                 <div class="custom-control custom-checkbox small">
                                     <input type="checkbox" class="custom-control-input" id="customCheck">
-                                    <label class="custom-control-label" for="customCheck">Remember
-                                        Me</label>
-                                </div>
+                                    <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                </div><br>
                             </div>
-                            <input class="infoSub" type="submit" name="save" class="btn btn-default" value="Login" />
+                            <input type="submit" name="save" class="btn btn-default" value="Login" style="background-color:#04AA6D; color: white; margin-left: 46.5%;">
                         </form>
-
+<br>
                         <!-- <div class="text-center">
                             <a class="small" href="forgot-password.html">Forgot Password?</a>
                         </div> -->

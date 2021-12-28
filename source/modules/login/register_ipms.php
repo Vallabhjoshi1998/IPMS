@@ -92,8 +92,8 @@ include 'header.php';
                     &nbsp;
                 </div>
                 <div class="submit">
-                    <input type="submit" name="save" class="btn btn-default" style="background-color:#04AA6D; color: white;" value="Submit" >
-                </div>
+                    <input type="submit" name="save" class="btn btn-default" style="background-color:#04AA6D; color: white; margin-left: 46.5%;" value="Submit" >
+                </div><br>
 
             </form>
 

@@ -172,10 +172,7 @@
                   <td><strong>Email </strong></td>
                   <td>principal@ycce.edu , info@ycce.edu</td>
                 </tr>
-                <tr>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-                </tr>
+                
               </tbody>
             </table>
             <div></div>
@@ -253,7 +250,7 @@
                             Mr. K. Chaple -&nbsp;8446439325</strong></div>
                       </td>
                       <td>
-                        <div align="center"><strong>For Accounts query <br>
+                        <div align="center"><strong>For Accounts Query <br>
                             Mr. Sandip Chede - &nbsp;9823456433</strong></div>
                       </td>
                     </tr>

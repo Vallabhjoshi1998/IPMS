@@ -9,9 +9,10 @@ include 'admin_dash_header.php';
 <?php
 function fetch_data()
 {
+    $batch = $_SESSION['batch'];
     $output = '';
     $conn_here = mysqli_connect("localhost", "root", "", "ipms");
-    $sql = "SELECT * FROM internship_data";
+    $sql = "SELECT * FROM internship_data WHERE batch='$batch'";
     $result_pdf = mysqli_query($conn_here, $sql);
     while ($row = mysqli_fetch_array($result_pdf)) {
         $output .= '<tr>  

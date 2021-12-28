@@ -219,6 +219,15 @@ $gap = $passout - $pass10;
 
                 <div class="row">
                     <div class="col-md-6">
+                        <label>12th Percentage</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p><?php echo $per12 ?></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
                         <label>Diploma Year of Passing</label>
                     </div>
                     <div class="col-md-6">

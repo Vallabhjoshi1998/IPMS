@@ -40,11 +40,20 @@ if (!empty($_POST['save'])) {
 
 
 
+
     $prof = "SELECT * FROM info WHERE email_id='$email_id'";
     $res_prof = mysqli_query($connect, $prof);
     $res = mysqli_fetch_array($res_prof);
 
     $user_profile = $res['profile_img'];
+
+
+    $ac = "SELECT * FROM login_details WHERE email_id='$email_id'";
+    $res_ac = mysqli_query($connect, $ac);
+    $ac_res = mysqli_fetch_array($res_ac);
+    $ac_type = $ac_res['ac_type'];
+
+
 ?>
 
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
@@ -55,7 +64,7 @@ if (!empty($_POST['save'])) {
 
     <div class="container emp-profile">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" style="float: left;">
 
                 <img class="img-profile" src="../profile_img/<?php echo $user_profile ?>" onerror=this.src="../profile_img/def.jpg" style="height: 120px; width: 120px; ">
 
@@ -64,26 +73,21 @@ if (!empty($_POST['save'])) {
                 <br>
 
             </div>
-            <!-- <div class="col-md-6">
-            <div class="profile-head">
-                <br>
-                <br>
-                <br>
-                <h5>
-                    <?php //echo $fname 
-                    ?><?php //echo " "
-                        ?><?php //echo $lname
-                            ?>
-                </h5>
-                <br>
-                <br>
-                <br>
+            <br>
 
-                <br>
-                <br>
+            <!-- <div class="col-md-4" style="float: right;">
+                <br><br>
+
+                <label for="ac_type"> Account Type : <?php // echo $ac_type ?></label>
+                <button type="submit"class="submit" placeholder="Update to Student TPC Co-ordinator" onclick="changeType()"></button><br>
 
             </div>
-        </div> -->
+            <script>
+                function changeType() {
+                    document.getElementById(changeType);
+
+                }
+            </script> -->
 
 
 
@@ -191,6 +195,15 @@ if (!empty($_POST['save'])) {
                         </div>
                         <div class="col-md-6">
                             <p><?php echo $pass12 ?></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>12th Percentage</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><?php echo $per12 ?></p>
                         </div>
                     </div>
 
@@ -367,6 +380,7 @@ if (!empty($_POST['save'])) {
                         <tr>
                             <th>Company Name</th>
                             <th>Salary</th>
+                            <th>Offer Letter</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -377,13 +391,20 @@ if (!empty($_POST['save'])) {
                             while ($row = mysqli_fetch_assoc($res_place)) {
                                 $company_name = $row['company_name'];
                                 $sal_lpa = $row['sal_lpa'];
+
+                                $offer = "SELECT * FROM offerletter WHERE regNo='$regNo'";
+                                $res_offer = mysqli_query($connect, $offer);
+                                $res1 = mysqli_fetch_assoc($res_offer);
+                                $offer_letter = $res1['source'];
                         ?>
 
                                 <tr>
                                     <td> <?php echo $company_name ?> </td>
                                     <td> <?php echo $sal_lpa ?> </td>
+                                    <td><embed src="../offer_letters/<?php echo $offer_letter ?>" width="300px" height="400px" /></td>
                                 </tr>
                         <?php
+
                             }
                         }
                         ?>
@@ -436,21 +457,10 @@ if (!empty($_POST['save'])) {
                 </table>
             </div>
         </section>
-    </div>
-    <br>
-    <br>
-    <br>
+        <br><br>
+       
 
-    <br>
-    <br>
-    <br>
-    <br>
-
-
-
-
-
-<?php
+    <?php
 }
 include 'admin_dash_footer.php';
-?>
+    ?>

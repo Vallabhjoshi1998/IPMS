@@ -12,7 +12,6 @@ $row_name = mysqli_fetch_array($resIntern);
 <br>
 <div class="form">
 
-    <br>
     <form action="student_add_internship_connection.php" method="GET">
         <div class="form-icon">
             <span><i class="icon icon-user"></i></span>
@@ -27,6 +26,10 @@ $row_name = mysqli_fetch_array($resIntern);
 
         <div class="form-group">
             <input type="email" name="email_id" class="form-control item" id="email_id" value="<?php echo $row_name['email_id'] ?>" readonly>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="batch" class="form-control item" id="batch" value="<?php echo $batch ?>" readonly>
         </div>
 
         <div class="form-group">

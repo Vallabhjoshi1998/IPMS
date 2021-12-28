@@ -2,28 +2,27 @@
 include_once '../utility/dbconfig.php';
 
 // session_start();
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 $username = $_SESSION["username"];
-$query_1 = "select fname from login_details where email_id ='$username'";
+$query_1 = "SELECT fname FROM login_details WHERE email_id ='$username'";
 
 $result_1 = mysqli_query($connect, $query_1);
 $row_admin_name = mysqli_fetch_array($result_1);
+
+$que_ba = "SELECT passout FROM info WHERE email_id ='$username'";
+
+$res_ba = mysqli_query($connect, $que_ba);
+$bat = mysqli_fetch_array($res_ba);
+$batch = $bat[0];
 
 
 $prof = "SELECT * FROM info WHERE email_id='$username'";
 $res_prof = mysqli_query($connect, $prof);
 $res = mysqli_fetch_array($res_prof);
-
-if($res['profile_img'] == null){
-    $profile_img = "../profile_img/def.jpg";
-}
-else{
-    $profile_img = $res['profile_img'];
-}
+$profile_img = $res['profile_img'];
 
 ?>
 
@@ -49,8 +48,8 @@ else{
     <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../assets/css/table.css" rel="stylesheet">
     <link href="../../assets/css/input-style.css" rel="stylesheet">
-    
-    
+
+
 
 </head>
 
@@ -95,12 +94,12 @@ else{
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Drive Management</h6>
                         <a type="button" class="collapse-item" href="fetch_current_drives.php">Current Drives</a>
-            
+
                     </div>
                 </div>
             </li>
 
-            
+
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
@@ -136,7 +135,7 @@ else{
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-           
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -166,7 +165,7 @@ else{
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                      
+
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -180,39 +179,40 @@ else{
                                     Alerts Center
                                 </h6>
                                 <?php
-                                    $alert_query = "SELECT * FROM alert";
-                                    $alert_res = mysqli_query($connect, $alert_query);
-                                    $total = mysqli_num_rows($alert_res);
-                                    if ($total > 0) {
-                                        $_SESSION['errorMessage'] = false;
-                                
-                                        while ($row    = mysqli_fetch_array($alert_res)) {
-                                
-                                            $alert_date= $row['alert_date'];
-                                            $alert= $row['alert'];
-                                           
-                                ?>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500"><?php echo $alert_date; ?></div>
-                                        <span class="font-weight-bold"></span>
-                                    </div>
-                                 &nbsp;<br><br>
-                                    <div>
-                                        <div class="small text-gray-500"><?php echo $alert; ?></div>
-                                        <span class="font-weight-bold"></span>
-                                    </div>
-                                </a>
-                                <?php } }?>
+                                $alert_query = "SELECT * FROM alert WHERE batch='$batch'";
+                                $alert_res = mysqli_query($connect, $alert_query);
+                                $total = mysqli_num_rows($alert_res);
+                                if ($total > 0) {
+                                    $_SESSION['errorMessage'] = false;
 
-                              
-                               
+                                    while ($row    = mysqli_fetch_array($alert_res)) {
+
+                                        $alert_date = $row['alert_date'];
+                                        $alert = $row['alert'];
+
+                                ?>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+
+                                            <div class="mr-3">
+                                                <div class="icon-circle bg-primary">
+                                                    <i class="fas fa-file-alt text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="small text-gray-500"><?php echo $alert_date; ?></div>
+                                                <span class="font-weight-bold"></span>
+                                            </div>
+                                            &nbsp;<br><br>
+                                            <div>
+                                                <div class="small text-gray-500"><?php echo $alert; ?></div>
+                                                <span class="font-weight-bold"></span>
+                                            </div>
+                                        </a>
+                                <?php }
+                                } ?>
+
+
+
                             </div>
                         </li>
 
@@ -220,7 +220,7 @@ else{
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">User Name</span> -->
-                                <img class="img-profile rounded-circle" src="../profile_img/<?php echo $user_profile?>" onerror=this.src="../profile_img/def.jpg">
+                                <img class="img-profile rounded-circle" src="../profile_img/<?php echo $profile_img ?>" onerror=this.src="../profile_img/def.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -243,5 +243,3 @@ else{
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                  

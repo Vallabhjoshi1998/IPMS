@@ -5,6 +5,7 @@
 if(!empty($_POST['save'])){
     $alert_date = $_POST['alert_date'];
     $alert = $_POST['alert'];
+    $batch = $_POST['batch'];
 	$query = "INSERT INTO `alert`(`alert_date`, `alert`) VALUES ('$alert_date','$alert')";
 	$result = mysqli_query($connect,$query);
 	if($result){

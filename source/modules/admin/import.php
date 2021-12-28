@@ -31,15 +31,15 @@ if($_FILES["import_excel"]["name"] != '')
     ':first_name'  => $row[0],
     ':last_name'  => $row[1],
     ':created_at'  => $row[2],
-    
-	':company_name' => $row[3],
-	'sal_lpa' => $row[4]
+    ':branch'  => $row[3],
+	':company_name' => $row[4],
+	'sal_lpa' => $row[5]
    );
 
    $query = "
    INSERT INTO placement_data 
-   (fname, lname, email_id,  company_name, sal_lpa) 
-   VALUES (:first_name, :last_name, :created_at,  :company_name, :sal_lpa)
+   (fname, lname, email_id, branch, company_name, sal_lpa) 
+   VALUES (:first_name, :last_name, :created_at, :branch, :company_name, :sal_lpa)
    ";
 
    $statement = $connect->prepare($query);

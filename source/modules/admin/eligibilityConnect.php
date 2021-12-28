@@ -22,36 +22,36 @@ if (!empty($_POST['save'])) {
 
     if($place_stat == "Unplaced" && $backlog == 0)
     {
-        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND live='$backlog' AND placement_status='$place_stat'";
+        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE passout='$batch' AND per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND live='$backlog' AND placement_status='$place_stat'";
     }
     else if($place_stat == "Unplaced" && $backlog == 1)
     {
-        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND placement_status='$place_stat'";
+        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE passout='$batch' AND per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND placement_status='$place_stat'";
               
     }
     else if($place_stat == "Placed" && $backlog == 0)
     {   
-        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND live='$backlog'";
+        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE passout='$batch' AND per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND live='$backlog'";
     }
     else if($place_stat == "Placed" && $backlog == 1)
     {
-        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap'";
+        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE passout='$batch' AND per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap'";
     }
     else if($place_stat == "Single Offer" && $backlog == 0)
     {
-        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND live='$backlog' AND (placement_status='$place_stat' OR placement_status = 'Unplaced')";
+        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE passout='$batch' AND per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND live='$backlog' AND (placement_status='$place_stat' OR placement_status = 'Unplaced')";
     }
     else if($place_stat == "Single Offer" && $backlog == 1)
     {
-        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND (placement_status='$place_stat' OR placement_status = 'Unplaced')";
+        $sql = "SELECT regNo, dept, fname, lname, email_id FROM info WHERE passout='$batch' AND per10 >= '$per10' AND (per12 >= '$per12' OR perDip >= '$perDip') AND avgSgpa >= '$avgSgpa' AND  gap<='$gap' AND (placement_status='$place_stat' OR placement_status = 'Unplaced')";
               
     }
 
-    $result_pdf = mysqli_query($conn_here, $sql); 
-    
+    $result_pdf = mysqli_query($conn_here, $sql);
+
 ?>
 
-    <table>
+    <table id="table" style="margin-bottom: 5%;">
         <tr>
             <td>Sr.No.</td>
             <td>Registration Number</td>
@@ -68,14 +68,32 @@ if (!empty($_POST['save'])) {
                     <td><?php echo ++$i; ?></td>
                     <td><?php echo $row['regNo'] ?></td>
                     <td><?php echo $row['dept'] ?></td>
-                    <td><?php echo $row['fname']?> &nbsp;<?php echo $row['lname'] ?></td>
+                    <td><?php echo $row['fname'] ?> &nbsp;<?php echo $row['lname'] ?></td>
                     <td><?php echo $row['email_id'] ?></td>
                 </tr><?php }
                 } ?>
         </tbody>
     </table>
 
-    <?php
 
+    <button class="btn btn-primary" id="btnExport" onclick="exportReportToExcel(this)">EXPORT LIST</button>
+
+    <script>
+        function exportReportToExcel() {
+            let table = document.getElementsByTagName("table");
+            TableToExcel.convert(table[0], {
+                name: `eligibility_list.xlsx`,
+                sheet: {
+                    name: 'Sheet 1'
+                }
+            });
+        }
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+
+    <?php
     include 'admin_dash_footer.php';
     ?>

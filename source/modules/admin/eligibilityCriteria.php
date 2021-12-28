@@ -14,6 +14,10 @@ include 'admin_dash_header.php';
         </div>
 
         <div class="form-group">
+            <input type="text" name="batch" class="form-control item" id="batch" placeholder="" value="<?php echo $batch  ?>" readonly>
+        </div>
+
+        <div class="form-group">
             <input type="text" name="per10" class="form-control item" id="per10" placeholder="10th Percentage">
         </div>
 

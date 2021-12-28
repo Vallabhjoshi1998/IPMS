@@ -32,7 +32,7 @@ include 'admin_dash_header.php';
             <label for="date_drive" class="placeholder">Date of Drive</label>
         </div>
         <div class="input-container ic2">
-            <input id="batch" class="input" type="text" placeholder=" " name="batch" required />
+            <input id="batch" class="input" type="text" placeholder=" " name="batch" value="<?php echo $batch ?>" readonly>
             <div class="cut cut-long-eligibilty"></div>
             <label for="batch" class="placeholder">For Batch</label>
         </div>

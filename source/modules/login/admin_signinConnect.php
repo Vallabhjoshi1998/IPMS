@@ -5,6 +5,8 @@ if (!empty($_GET['save'])) {
 
 	$username = $_GET['username'];
 	$password = $_GET['pass'];
+	$batch = $_GET['batch'];
+	
 
 	$query = "select * from admin_details where email_id ='$username' and pass = '$password'";
 
@@ -14,8 +16,9 @@ if (!empty($_GET['save'])) {
 	if ($count > 0) {
 		session_start();
 		$_SESSION['username'] = $username;
+		$_SESSION['batch'] = $batch;
 
-		header("Location:../admin/admin_dash.php");   # Temporary admin dashboard (In future we have to implement the student dashboard)
+		header("Location:../admin/admin_dash.php");   
 		exit();
 	} else {
 ?>

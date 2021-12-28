@@ -6,7 +6,6 @@ include 'admin_dash_header.php';
 <div class="form" style="margin-bottom: 10%;">
     <br>
     <br>
-    <br>
 
     <form action="add_oppurtunities_connection.php" method="POST" enctype="multipart/form-data">
         <div class="input-container ic1">
@@ -32,6 +31,12 @@ include 'admin_dash_header.php';
             <input id="duration" class="input" type="text" placeholder=" " name="duration" required />
             <div class="cut cut-salary"></div>
             <label for="duartion" class="placeholder">Duration of Internship</label>
+        </div>
+
+        <div class="input-container ic2">
+            <input id="batch" class="input" type="text" placeholder=" " name="batch" value="<?php echo $batch ?>" readonly>
+            <div class="cut cut-long-eligibilty"></div>
+            <label for="batch" class="placeholder">For Batch</label>
         </div>
 
         <div class="input-container ic2">

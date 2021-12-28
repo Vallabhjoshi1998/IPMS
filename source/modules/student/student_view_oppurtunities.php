@@ -17,12 +17,15 @@ include 'student_dash_header.php';
                                 <th>Registration Link</th>
                             </tr>
                         </thead>
+                    
+                
+
 <?php
 
 $connect = mysqli_connect("localhost", "root", "", "ipms") or die("Connection failed");
 $_SESSION['errorMessage'] = false;
 
-    $query = "SELECT * FROM internship_opportunities";
+    $query = "SELECT * FROM internship_opportunities WHERE batch='$batch'";
     $result = mysqli_query($connect, $query);
     $count = mysqli_num_rows($result);
     if ($count > 0) {
@@ -35,7 +38,13 @@ $_SESSION['errorMessage'] = false;
             $date_start= $row['date_start'];
             $duration= $row['duration'];
             $reg_link= $row['reg_link'];
+            
+            
+    
+    
  ?>
+                
+                
                             <tr>
                                 <td> <?php echo $company_name ?></td>
                                 <td> <?php echo $el_criteria ?> </td>

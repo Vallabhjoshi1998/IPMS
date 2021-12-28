@@ -1,12 +1,14 @@
 <?php
 $connectDb = mysqli_connect("localhost", "root", "", "ipms")  or die("Connection failed");
+$ac_type = "Regular";
 if (!empty($_GET['save'])) {
     $fname = $_GET['fname'];
     $lname = $_GET['lname'];
     $username = $_GET['username'];
     $pass = $_GET['pass'];
     $cnf_pass = $_GET['cnf_pass'];
-    $query = "INSERT INTO login_details(fname,lname,email_id,pass) VALUES ('$fname','$lname','$username','$pass')";
+    
+    $query = "INSERT INTO login_details(fname,lname,email_id,pass,ac_type) VALUES ('$fname','$lname','$username','$pass','$ac_type')";
     $result = mysqli_query($connectDb, $query);
     if (!$result) {
 
