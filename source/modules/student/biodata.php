@@ -1,284 +1,515 @@
-<?php include 'student_dash_header.php' ?>
+<?php include 'student_dash_header.php'; 
+
+$conn = mysqli_connect("localhost", "root", "", "ipms") or die("Connection Failed");
+$sql = "SELECT * FROM info WHERE email_id='$username'";
+$result = mysqli_query($conn, $sql) or die("Query Unsuccessful");
+$row = mysqli_fetch_assoc($result);
+?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <style>
-    /* input[type=text] {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #000000;
-  } */
-    /* input[type=email] {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #000000;
-  } */
-    /* input[type=number] {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #000000;
-  } */
-    /* input[type=date] {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #000000;
-  } */
-    /* input[type=tel] {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #000000;
-  } */
-    table,
-    th,
-    td {
-      border: 1px solid black;
-    }
-
-    label {
-      display: inline-block;
-      width: 180px;
-      text-align: right;
-    }
-
-    .label_modify {
-      display: inline-block;
-      width: 450px;
-      text-align: right;
-    }
-
-    .left {
-      float: left;
-      width: 65%;
-    }
-
-    .right {
-      float: right;
-      width: 35%
-    }
-
-    .center {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .box {
-      background-color: lightblue;
-      width: 1000px;
-      border: 1px solid blue;
-      padding: 50px;
-      margin: 20px;
-    }
-
-    .body_one {
-      padding-left: 20px;
-    }
-  </style>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YCCE - Student Biodata Form</title>
+    <script src="https://cdn.tailwindcss.com/"></script>
 </head>
+<style>
+    input[type="radio"]+label span {
+        transition: background .2s,
+            transform .2s;
+    }
+
+    input[type="radio"]+label span:hover,
+    input[type="radio"]+label:hover span {
+        transform: scale(1.2);
+    }
+
+    input[type="radio"]:checked+label span {
+        background-color: #1F9D55;
+        box-shadow: 0px 0px 0px 2px white inset;
+    }
+
+    input[type="radio"]:checked+label {
+        color: #1F9D55;
+    }
+
+    input[type="text"]::placeholder {
+
+        /* Firefox, Chrome, Opera */
+        text-align: left;
+    }
+
+    input[type="email"]::placeholder {
+
+        /* Firefox, Chrome, Opera */
+        text-align: left;
+    }
+</style>
 
 <body>
-  <div class="container">
-<form action="biodataConnect.php" method="POST">
-    <h1 style="text-align:center;"><u>Contact Details of Students and Industry and academic Mentor</u></h1><br>
-    <h2 style="text-align:center;">Student Details</h2><br>
-    <div class="body_one">
-      <div class="box">
-        <div class="left">
-          <b><label for="bname">Student Name:</label></b>
-          <input type="text" id="bname" name="stud_name" rows="4" cols="50"></input><br><br>
-          <b><label for="eno">Enrollment Number:</label></b>
-          <input type="text" id="eno" name="stud_eno"><br><br>
-          <b><label for="by">Year:</label></b>
-          <input type="text" id="by" name="stud_year"><br><br>
-          <b><label for="c_addresss">Campus Address:</label></b>
-          <input type="text" id="c_addresss" name="stud_cAddresss"><br><br>
+    <section class=" py-1 bg-blueGray-50" style="margin-bottom: 12%;">
+        <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
+            <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+                <div class="rounded-t bg-white mb-0 px-6 py-6">
+                    <div class="text-center flex justify-between">
+                        <h1 class="text-blueGray-700 font-bold" style="font-size: 1.75rem;">
+                            Contact Details of Students, Industry & Academic Mentor
+                        </h1>
+                    </div>
+                </div>
+                <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <form action="biodataConnection.php" method="POST">
+                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            STUDENT DETAILS
+                        </h6>
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Student Name:
+                                    </label>
+                                    <input style="font-weight: bold;" readonly value="<?php echo $row['fname'];?> <?php echo $row['lname']; ?>" style="width: 20rem; font-size: medium;" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" name="stud_name">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Enrollment Number:
+                                    </label>
+                                    <input style="font-weight: bold;" value="<?php echo $row['regNo']; ?>" readonly name="stud_eno" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Year:
+                                    </label>
+                                    <input required placeholder="Year" style="width: 20rem;" name="stud_year" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Campus Address:
+                                    </label>
+                                    <input required placeholder="Campus Address" name="stud_cAddresss" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Mobile Number:
+                                    </label>
+                                    <input required placeholder="Mobile Number" name="stud_phone" type="tel" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Email ID:
+                                    </label>
+                                    <input readonly style="font-weight: bold;" value="<?php echo $row['email_id']; ?>" name="stud_email" type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        State:
+                                    </label>
+                                    <select required style="height: 3.5rem;" name="stud_state" class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" placeholder="State">
+                                        <option value="" selected>Choose Your State</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                        <option value="Daman and Diu">Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        City:
+                                    </label>
+                                    <input required name="stud_city" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="City">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="mt-6 border-b-1 border-blueGray-300">
+
+                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            Industrial Supervisor
+                        </h6>
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Name:
+                                    </label>
+                                    <input required style="width: 20rem;" name="sup_name" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Title:
+                                    </label>
+                                    <input required name="sup_title" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Title">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Organization:
+                                    </label>
+                                    <input required style="width: 20rem;" name="sup_org" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Organization">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Internship Campus Address:
+                                    </label>
+                                    <input required name="ic_addresss" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Internship Campus Address">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Mobile Number:
+                                    </label>
+                                    <input required name="sup_phone" type="tel" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Mobile Number">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Email ID:
+                                    </label>
+                                    <input placeholder="Email Id" required name="sup_email" type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        State:
+                                    </label>
+                                    <select required style="height: 3.5rem;" name="sup_state" class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" placeholder="State">
+                                        <option value="" selected>Choose Your State</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chandigarh">Chandigarh</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                        <option value="Daman and Diu">Daman and Diu</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Lakshadweep">Lakshadweep</option>
+                                        <option value="Puducherry">Puducherry</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Manipur">Manipur</option>
+                                        <option value="Meghalaya">Meghalaya</option>
+                                        <option value="Mizoram">Mizoram</option>
+                                        <option value="Nagaland">Nagaland</option>
+                                        <option value="Odisha">Odisha</option>
+                                        <option value="Punjab">Punjab</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Sikkim">Sikkim</option>
+                                        <option value="Tamil Nadu">Tamil Nadu</option>
+                                        <option value="Telangana">Telangana</option>
+                                        <option value="Tripura">Tripura</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="West Bengal">West Bengal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        City:
+                                    </label>
+                                    <input required name="sup_city" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="City">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="mt-6 border-b-1 border-blueGray-300">
+
+                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            Faculty mentor
+                        </h6>
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Name:
+                                    </label>
+                                    <input required style="width: 20rem;" name="fac_name" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Address:
+                                    </label>
+                                    <input required name="fac_addresss" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Address">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Mobile Number:
+                                    </label>
+                                    <input required name="fac_phone" type="tel" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Mobile Number">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <hr class="mt-6 border-b-1 border-blueGray-300">
+
+                        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                            Academic Credit Information
+                        </h6>
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Department:
+                                    </label>
+                                    <input required name="ac_Departmen" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Department">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Internship Title:
+                                    </label>
+                                    <input required name="ac_ititle" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" value="" placeholder="Internship Title">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Beginning Date:
+                                    </label>
+                                    <input required name="ac_begdate" type="date" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Begining Date">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Ending Date:
+                                    </label>
+                                    <input required name="ac_enddate" type="date" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Ending Date">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Credits:
+                                    </label>
+                                    <input required name="ac_credit" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Credits">
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Hour per week:
+                                    </label>
+                                    <input required name="ac_hpw" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Hour per week">
+                                </div>
+                            </div>
+
+                            <div class="w-full lg:w-6/12 px-4">
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                        Internship is:
+                                    </label>
+                                    <div class="mx-auto max-w-sm text-center flex flex-wrap justify-center">
+
+                                        <div class="flex items-center mr-4 mb-4">
+                                            <input required id="radio1" type="radio" name="bpaid" class="hidden" value="Paid" />
+                                            <label for="radio1" class="flex items-center cursor-pointer">
+                                                <span class="w-4 h-4 inline-block mr-1 border border-grey"></span>
+                                                Paid</label>
+                                        </div>
+
+                                        <div class="flex items-center mr-4 mb-4">
+                                            <input required id="radio2" type="radio" name="bpaid" class="hidden" value="Unpaid" />
+                                            <label for="radio2" class="flex items-center cursor-pointer">
+                                                <span class="w-4 h-4 inline-block mr-1 border border-grey"></span>
+                                                Unpaid</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body_one">
+                                <hr class="mt-6 border-b-1 border-blueGray-300">
+                                <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                    Internship Objectives/Learning Activities
+                                </h6>
+                                <ol>
+                                    <li>
+                                        <b>1) Internship Objectives:</b><br><br>
+                                        Student will :
+                                        <ul class="list-disc list-inside">
+                                            <li class="ml-4">Exposure to the current technological developments, industrial environment and sharpen the real time technical / managerial skills required at the job for personal development.</li>
+                                            <li class="ml-4">Learn the Technical knowledge in real industrial situations and develop an application and also able to do technical documentation on work with all the industrial ethics.
+                                            <li class="ml-4">Understand the various aspects of industry which influence the working of organization, learn psychology of the workers and their habits, attitudes and approach to problem solving to become future employers/employee.</li>
+                                    </li>
+                                    </ul>
+                                    </li><br><br>
+                                    <li><b>2) Learning Activities:</b><br><br>
+                                        On the job:Following Listed activities need to be completed by the intern student:
+                                        <ul class="list-disc list-inside">
+                                            <li class="ml-4">Daily report to respective Company/Organization</li>
+                                            <li class="ml-4">To complete the training on one of the advanced/ Current Technology</li>
+                                            <li class="ml-4">To develop a module by using trained technology</li>
+                                            <li class="ml-4">Timely report to college for various evaluation and submit the various formats required for completion of internship (Student Diary, attendance sheet, Internship Certificate, feedback form, etc)</li>
+                                        </ul>
+                                    </li><br><br>
+                                    <li>
+                                        <b>3) Teaching/Mentoring Activities</b><br><br>
+                                        Following Listed activities need to be completed by the academic mentor of students:
+                                        <ul class="list-disc list-inside">
+                                            <li class="ml-4">Timidly visit to the intern company/Organization by following the rule and regulation of respective company/organization</li>
+                                            <li class="ml-4">Monitor the progress of allotted intern and mentor him if required.</li>
+                                            <li class="ml-4">Communicate with the industry mentor and collect the feedback form and any suggestion if given</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                                <br><br>
+
+
+                                <hr class="mt-6 border-b-1 border-blueGray-300">
+                                <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                    The Internship Evaluation Details:
+                                </h6>
+                                <p>Evaluation of the internship project is as per following parameters:</p><br><br>
+                                <table style="width:100%; border: 1px solid black; border-color: #96D4D4" class="auto">
+                                    <tr>
+                                        <th>Sr no.:</th>
+                                        <th>Project Progresst</th>
+                                        <th>Distribution of marks out of 100</th>
+                                        <th>Rubrics</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">1.</td>
+                                        <td style="text-align:center;">Title Seminar and Progress Seminar-I (Evaluation by PAC)</td>
+                                        <td style="text-align:center;">10 Marks</td>
+                                        <td>
+                                            <ul>
+                                                <li>SRS(Software requirement specification) (4)</li>
+                                                <li>Analysis (6)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">2.</td>
+                                        <td style="text-align:center;">Progress Seminar-II (Evaluation by PAC)</td>
+                                        <td style="text-align:center;">10 Marks</td>
+                                        <td>
+                                            <ul>
+                                                <li>Design (4)</li>
+                                                <li>Demonstration of working prototype (6)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">3.</td>
+                                        <td style="text-align:center;">Evaluation by PQAI</td>
+                                        <td style="text-align:center;">20 Marks</td>
+                                        <td>
+                                            <ul>
+                                                <li>Communication (5)</li>
+                                                <li>Project knowledge (15)</li>
+                                                <li>Presentation (05)</li>
+                                                <li>Completion Status (05)</li>
+                                                <li>Innovativeness (05)</li>
+                                                <li>Efforts taken (05)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">4.</td>
+                                        <td style="text-align:center;">End Semester Project Demonstration 60 Marks As per ANNEXURE-A and B and External evaluation grade</td>
+                                        <td style="text-align:center;">60 Marks</td>
+                                        <td>As per ANNEXURE-A and B and External evaluation grade</td>
+                                    </tr>
+
+                                </table><br>
+                                <b>
+                                    <br><br>
+                                    <hr class="mt-6 border-b-1 border-blueGray-300">
+                                    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                                        The Internship Evaluation Details:
+                                    </h6>
+                                    <p style="width:100%;" class="center">I undersign students of <input required style="width: 7rem; height: 1rem;" type="number" name="sem" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Semester"> Semester of <input required style="width: 14rem; height: 1rem;" name="semdept" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Department">branch, follows the all the rules and regulations of college as well as the allotted company/organization for internship from
+                                        <input required style="width: 10rem;height: 1.2rem;" name="sembegdate" type="date" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Starting Date">
+                                        to
+                                        <input required style="width: 10rem;height: 1.2rem;" name="sem_enddate" type="date" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Ending Date">
+                                        .
+                                    </p>
+                            </div>
+                            <div class="mt-10" style="margin-left: 17.4rem;">
+                                <input style="width: 10rem;" class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="submit" value="Submit" name="save">
+                            </div>
+                    </form>
+
+                </div>
+            </div>
         </div>
-        <div class="right">
+    </section>
+</body>
 
-          <b><label for="bphone">Mobile Number:</label></b>
-          <input type="tel" id="bphone" name="stud_phone" placeholder="+91-000-000-0000"  required maxlength="13" size="13"><br><br>
-          <b><label for="e_email">Email:</label></b>
-          <input type="email" id="e_email" name="stud_email"><br><br>
-          <b><label for="state">State:</label></b>
-          <input type="text" id="state" name="stud_state"><br><br>
-          <br><br>
-          <b><label for="city">City:</label></b>
-          <input type="text" id="city" name="stud_city" rows="4" cols="50"></input><br><br>
-        </div><br><br><br><br><br><br><br><br><br><br><br><br>
-      </div>
-    </div>
+</html>
 
-    <h2 style="text-align:center;">Industrial Supervisor</h2><br>
-    <div class="body_one">
-      <div class="box">
-        <div class="left">
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for=bename">Name:</label></b>
-          <input type="text" id="bename" name="sup_name" rows="4" cols="50"></input><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="etitle">Title:</label></b>
-          <input type="text" id="etitle" name="sup_title"><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="co">Organization:</label></b>
-          <input type="text" id="co" name="sup_org"><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="ic_addresss"> Internship Campus Address:</label></b>
-          <input type="text" id="ic_addresss" name="ic_addresss"><br><br>
-        </div>
-        <div class="right">
-
-          <b><label for="bephone">Mobile Number:</label></b>
-          <input type="tel" id="bephone" name="sup_phone" placeholder="+91-000-000-0000"  required maxlength="13" size="13"><br><br>
-          <b><label for="be_email">Email:</label></b>
-          <input type="email" id="be_email" name="sup_email"><br><br>
-          <b><label for="estate">State:</label></b>
-          <input type="text" id="sup_state" name="sup_state">
-          <br><br>
-          <b><label for=ecity">City:</label></b>
-          <input type="text" id="ecity" name="sup_city" rows="4" cols="50"></input><br><br>
-        </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-      </div>
-    </div>
-
-    <h2 style="text-align:center;">Faculty mentor</h2><br>
-    <div class="body_one">
-      <div class="box">
-        <div class="left">
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for=mname">Name:</label></b>
-          <input type="text" id="mname" name="fac_name" rows="4" cols="50"></input><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="m_addresss">Address:</label></b>
-          <input type="text" id="fac_addresss" name="fac_addresss"><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="mphone">Mobile Number:</label></b>
-          <input type="tel" id="mphone" name="fac_phone" placeholder="+91-000-000-0000"  required maxlength="13" size="13"><br><br>
-        </div><br><br><br><br><br><br><br><br><br><br><br><br>
-      </div>
-
-      <h2 style="text-align:center;">Academic Credit Information</h2><br>
-      <div class="box">
-        <div class="left">
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for=bDepartmen">Department:</label></b>
-          <input type="text" id="bDepartmen" name="ac_Departmen" rows="4" cols="50"></input><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="Ititle">Internship Title:</label></b>
-          <input type="text" id="Ititle" name="ac_ititle"><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="begdate"> Beginning Date:</label></b>
-          <input type="date" id="begdate" name="ac_begdate"><br><br>
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<b><label for="enddate"> Ending Date:</label></b>
-          <input type="date" id="enddate" name="ac_enddate"><br><br>
-        </div>
-        <div class="right">
-          <b><label for="cr">Credits:</label></b>
-          <input type="number" id="cr" name="ac_credit"><br><br>
-          <b><label for="hpw">Hours Per Week:</label></b>
-          <input type="number" id="hpw" name="ac_hpw"><br><br>
-          <b><label for="Internship">Internship is:</label></b><br><br>
-          <label for="bpaid">Paid</label>
-          <input type="radio" id="bpaid" name="bpaid" value="paid">
-          <label for="paid">Unpaid</label>
-          <input type="radio" id="bpaid" name="bpaid" value="unpaid">
-        </div>
-        <br><br><br><br><br><br>
-      </div>
-    </div>
-
-  </div>
-  <div class="body_one">
-    <h2><u>Internship Objectives/Learning Activities</u></h2>
-    <ol>
-      <li>
-        <b>Internship Objectives:</b><br><br>
-        Student will :
-        <ul>
-          <li>Exposure to the current technological developments, industrial environment and sharpen the real time technical / managerial skills required at the job for personal development.</li>
-          <li>Learn the Technical knowledge in real industrial situations and develop an application and also able to do technical documentation on work with all the industrial ethics.
-          <li>Understand the various aspects of industry which influence the working of organization, learn psychology of the workers and their habits, attitudes and approach to problem solving to become future employers/employee.</li>
-      </li>
-      </ul>
-      </li><br><br>
-      <li><b>Learning Activities:</b><br><br>
-        On the job:Following Listed activities need to be completed by the intern student:
-        <ul>
-          <li>Daily report to respective Company/Organization</li>
-          <li>To complete the training on one of the advanced/ Current Technology</li>
-          <li>To develop a module by using trained technology</li>
-          <li>Timely report to college for various evaluation and submit the various formats required for completion of internship (Student Diary, attendance sheet, Internship Certificate, feedback form, etc)</li>
-        </ul>
-      </li><br><br>
-      <li>
-        <b>Teaching/Mentoring Activities</b><br><br>
-        Following Listed activities need to be completed by the academic mentor of students:
-        <ul>
-          <li>Timidly visit to the intern company/Organization by following the rule and regulation of respective company/organization</li>
-          <li>Monitor the progress of allotted intern and mentor him if required.</li>
-          <li>Communicate with the industry mentor and collect the feedback form and any suggestion if given</li>
-        </ul>
-      </li>
-    </ol>
-    <br><br>
-    <h2><u>The Internship Evaluation Details:</u></h2>
-    <p>Evaluation of the internship project is as per following parameters:</p><br><br>
-    <table style="width:90%;" class="center">
-      <tr>
-        <th>Sr no.:</th>
-        <th>Project Progresst</th>
-        <th>Distribution of marks out of 100</th>
-        <th>Rubrics</th>
-      </tr>
-      <tr>
-        <td style="text-align:center;">1.</td>
-        <td style="text-align:center;">Title Seminar and Progress Seminar-I (Evaluation by PAC)</td>
-        <td style="text-align:center;">10 Marks</td>
-        <td>
-          <ul>
-            <li>SRS(Software requirement specification) (4)</li>
-            <li>Analysis (6)</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:center;">2.</td>
-        <td style="text-align:center;">Progress Seminar-II (Evaluation by PAC)</td>
-        <td style="text-align:center;">10 Marks</td>
-        <td>
-          <ul>
-            <li>Design (4)</li>
-            <li>Demonstration of working prototype (6)</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:center;">3.</td>
-        <td style="text-align:center;">Evaluation by PQAI</td>
-        <td style="text-align:center;">20 Marks</td>
-        <td>
-          <ul>
-            <li>Communication (5)</li>
-            <li>Project knowledge (15)</li>
-            <li>Presentation (05)</li>
-            <li>Completion Status (05)</li>
-            <li>Innovativeness (05)</li>
-            <li>Efforts taken (05)</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td style="text-align:center;">4.</td>
-        <td style="text-align:center;">End Semester Project Demonstration 60 Marks As per ANNEXURE-A and B and External evaluation grade</td>
-        <td style="text-align:center;">60 Marks</td>
-        <td>As per ANNEXURE-A and B and External evaluation grade</td>
-      </tr>
-
-    </table><br>
-    <b>
-      <br><br>
-      <h2><u>The Internship Evaluation Details:</u></h2>
-      <p style="width:90%;" class="center">I undersign students of <input type="number" id="semdate" name="sem"> Semester of <input type="text" id="semdept" name="dept">branch, follows the all the rules and regulations of college as well as the allotted company/organization for internship from <input type="date" id="sembegdate" name="sembegdate"> to <input type="date" id="sem_enddate" name="sem_enddate"></p>
-  </div>
-  <div id="biodata" style="text-align: center;"><input type="submit" name="submit" value="Submit"></div>
-  <br>
-  <br>
-  <br>
-
-  <br>
-  
-</form>
-
-<?php include 'student_dash_footer.php' ?>
+<?php include 'student_dash_footer.php'; ?>
