@@ -41,7 +41,10 @@ if (isset($_POST["create_pdf"])) {
     $obj_pdf->SetFont('helvetica', '', 12);
     $obj_pdf->AddPage();
     $content = '';
-    $content .= '  
+    $content .= '
+        <div>
+            <img style="width: 100000000%;" src="header.png" alt="" srcset="">
+        </div>  
       <h3 align="center">All Placements</h3><br /><br />  
       <table border="1" cellspacing="0" cellpadding="5">  
            <tr>  

@@ -156,6 +156,7 @@ $row_admin_name = mysqli_fetch_array($result);
                         <h6 class="collapse-header">See Student Feedback Data</h6>
                         <a class="collapse-item" href="stud_feedback_data.php">Student Feedback</a>
                         <a class="collapse-item" href="stud_attendance_data.php">Student Attendance</a>
+                        <a class="collapse-item" href="stud_biodata_feedback.php">Biodata Form</a>
                     </div>
                 </div>
             </li>

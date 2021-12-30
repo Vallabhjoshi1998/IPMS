@@ -26,7 +26,7 @@ include 'admin_dash_header.php';
     <br>
     <br>
         <div class="submit">
-                <input type="submit" name="save" class="btn btn-block create-account" value="View Profile">
+                <input style="width: 50%; margin-left: 25%;" type="submit" name="save" class="btn btn-block create-account" value="View Profile">
             </div>
     </form>
 </div>
