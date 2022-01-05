@@ -1,3 +1,6 @@
+            <!-- Tailwind-->
+            <script src="https://cdn.tailwindcss.com/"></script>
+            
             <!-- Footer -->
             <footer class="sticky-footer bg-white fixed-bottom" style="height: 6%; width: 85%; margin-left: 15%">
                         <div class="container my-auto">
@@ -28,8 +31,8 @@
                         </div>
                         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="../../index.php">Logout</a>
+                            <button class="bg-red-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" href="../../index.php">Logout</a>
                         </div>
                     </div>
                 </div>

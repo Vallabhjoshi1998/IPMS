@@ -18,7 +18,7 @@
 
         $_SESSION['reg_no'] = $_POST['reg_no'];
         $reg_no = $_SESSION['reg_no'];
-    
+
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -92,9 +92,52 @@
                                 </table>
 
                                 <h4>Faculty Mentor</h4>
+                                <table style="width: 100%;" class="table table-bordered">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Mobile Number</th>
+                                    </thead>
+                                    <tbody>
+                                        <td><?php echo $row['fac_name']; ?></td>
+                                        <td><?php echo $row['fac_addresss']; ?></td>
+                                        <td><?php echo $row['fac_phone']; ?></td>
+                                    </tbody>
+                                </table>
 
+                                <h4>Academic Credit Information</h4>
+                                <table style="width: 100%;" class="table table-bordered">
+                                    <thead>
+                                        <th>Department</th>
+                                        <th>Title</th>
+                                        <th>Beginning Date</th>
+                                        <th>Ending Date</th>
+                                        <th>Credit</th>
+                                        <th>Hours Per Week</th>
+                                        <th>Paid/Unpaid</th>
+                                    </thead>
+                                    <tbody>
+                                        <td><?php echo $row['ac_Departmen']; ?></td>
+                                        <td><?php echo $row['ac_ititle']; ?></td>
+                                        <td><?php echo $row['ac_begdate']; ?></td>
+                                        <td><?php echo $row['ac_enddate']; ?></td>
+                                        <td><?php echo $row['ac_credit']; ?></td>
+                                        <td><?php echo $row['ac_hpw']; ?></td>
+                                        <td><?php echo $row['bpaid']; ?></td>
+                                    </tbody>
+                                </table>
 
-
+                                <h4>Internship Evaluation Details:</h4>
+                                <table>
+                                    <thead>
+                                        <p style="width:100%;" class="center">I undersign students of <i style="font-weight: 700;"> <?php echo $row['sem']; ?> </i> Semester of <i style="font-weight: 700;"> <?php echo $row['semdept']; ?> </i> branch, follows the all the rules and regulations of college as well as the allotted company/organization for internship from
+                                            <i style="font-weight: 700;"> <?php echo $row['sembegdate']; ?> </i>
+                                            to
+                                            <i style="font-weight: 700;"> <?php echo $row['sem_enddate']; ?> </i>
+                                            .
+                                        </p>
+                                    </thead>
+                                </table>
 
                             </div>
                         </div>
@@ -103,7 +146,7 @@
             </div>
         </div>
 
-        <form action="create_pdf.php" method="post" style="padding-bottom: 10%; margin-left: 45%;">
+        <form action="create_pdf_biodata.php" method="post" style="padding-bottom: 10%; margin-left: 45%;">
             <button type="submit" class="btn btn-primary" name="create_pdf">Create PDF</button>
         </form>
 
